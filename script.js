@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            console.error('Erro:', error);
+            console.error('Erro na requisição:', error);
             // Exibe a mensagem de erro
             messageTitle.textContent = 'Erro!';
             messageText.textContent = 'Erro ao enviar o e-mail. Tente novamente mais tarde.';

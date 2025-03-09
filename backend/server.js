@@ -6,26 +6,35 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+// Configuração do CORS
 app.use(cors({
-    origin: 'http://localhost:5500',
+    origin: 'http://localhost:5500', // Ajuste para a URL do seu front-end
     methods: ['GET', 'POST'],
     credentials: true
 }));
 
+// Configuração do body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Configuração do Nodemailer
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     service: 'gmail',
     auth: {
-        user: 'iboxxrogi@gmail.com',
-        pass: 'elhx deau snbs yobh' // Substitua pela senha de aplicativo do Gmail
+        user: 'iboxxrogi@gmail.com', // Seu e-mail do Gmail
+        pass: 'elhx deau snbs yobh' // Senha de aplicativo do Gmail
     }
 });
 
+// Rota para a raiz (GET)
+app.get('/', (req, res) => {
+    res.send('Back-end está funcionando!');
+});
+
+// Rota para enviar e-mail (POST)
 app.post('/send', (req, res) => {
     const { name, email, message } = req.body;
 
@@ -33,7 +42,7 @@ app.post('/send', (req, res) => {
 
     const mailOptions = {
         from: email,
-        to: 'iboxxrogi@gmail.com',
+        to: 'iboxxrogi@gmail.com', // E-mail do destinatário
         subject: 'Enviando email com nodemailer',
         html: `
             <h1>Olá, Desenvolvedor Igor!</h1>
@@ -52,8 +61,9 @@ app.post('/send', (req, res) => {
         console.log("E-mail enviado com sucesso:", info.response);
         res.json({ success: true, message: 'E-mail enviado com sucesso!' });
     });
-}); // Fechamento do app.post
+});
 
+// Iniciar o servidor
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });

@@ -358,3 +358,10 @@ footer {
 .indicador.ativo {
     background-color: #0073e6;
 }
+.grupo-depoimentos {
+    display: none; /* Oculta todos os grupos por padrão */
+}
+
+.grupo-depoimentos.ativo {
+    display: flex; /* Exibe o grupo ativo */
+}
